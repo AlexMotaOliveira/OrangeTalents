@@ -3,7 +3,6 @@ package com.talents.orange.demo.infrastructure.web;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 

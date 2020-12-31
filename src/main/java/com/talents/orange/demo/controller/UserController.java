@@ -1,13 +1,15 @@
 package com.talents.orange.demo.controller;
 
+import com.talents.orange.demo.dto.request.UserDTO;
 import com.talents.orange.demo.dto.response.MessageResponseDTO;
-import com.talents.orange.demo.entity.User;
+import com.talents.orange.demo.exception.UserNotFoundException;
 import com.talents.orange.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -24,14 +26,30 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createUser(
-            @RequestBody
-            @Valid User userDTO){
+    public MessageResponseDTO createUser(@RequestBody @Valid UserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 
-    @GetMapping("/{id}")
-    public User findyId(@PathVariable Long id) throws Exception {
-        return userService.finfById(id);
+    @GetMapping
+    public List<UserDTO> listAll() {
+        return userService.listAll();
     }
+
+    @GetMapping("/{id}")
+    public UserDTO findyId(@PathVariable Long id) throws UserNotFoundException {
+        return userService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void  delete (@PathVariable Long id) throws UserNotFoundException{
+        userService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable Long id,@RequestBody @Valid UserDTO userDTO) throws UserNotFoundException {
+        return userService.updateById(id, userDTO);
+    }
+
+
 }
