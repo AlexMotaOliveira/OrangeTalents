@@ -1,4 +1,4 @@
-package com.talents.orange.demo.infrastructure.web;
+package com.orangestalents.orange.demo.infrastructure.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

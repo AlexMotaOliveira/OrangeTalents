@@ -1,7 +1,7 @@
-package com.talents.orange.demo.mapper;
+package com.orangestalents.mapper;
 
-import com.talents.orange.demo.dto.request.UserDTO;
-import com.talents.orange.demo.entity.User;
+import com.orangestalents.dto.request.UserDTO;
+import com.orangestalents.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

@@ -1,9 +1,10 @@
-package com.talents.orange.demo.controller;
+package com.orangestalents.controller;
 
-import com.talents.orange.demo.dto.request.UserDTO;
-import com.talents.orange.demo.dto.response.MessageResponseDTO;
-import com.talents.orange.demo.exception.UserNotFoundException;
-import com.talents.orange.demo.service.UserService;
+import com.orangestalents.dto.request.UserDTO;
+import com.orangestalents.dto.response.MessageResponseDTO;
+import com.orangestalents.exception.UserNotFoundException;
+import com.orangestalents.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/v1/user")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
-
     private UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -50,6 +45,4 @@ public class UserController {
     public MessageResponseDTO updateById(@PathVariable Long id,@RequestBody @Valid UserDTO userDTO) throws UserNotFoundException {
         return userService.updateById(id, userDTO);
     }
-
-
 }

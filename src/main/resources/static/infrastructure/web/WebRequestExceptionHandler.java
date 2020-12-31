@@ -1,6 +1,6 @@
-package com.talents.orange.demo.infrastructure.web;
+package com.orangestalents.orange.demo.infrastructure.web;
 
-import com.talents.orange.demo.infrastructure.DuplicateUserException;
+import com.orangestalents.orange.demo.infrastructure.DuplicateUserException;
 import org.springframework.data.rest.core.RepositoryConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

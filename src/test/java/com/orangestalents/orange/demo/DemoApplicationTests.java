@@ -1,4 +1,4 @@
-package com.talents.orange.demo;
+package com.orangestalents.orange.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

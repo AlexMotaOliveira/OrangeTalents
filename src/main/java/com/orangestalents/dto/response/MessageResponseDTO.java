@@ -1,4 +1,4 @@
-package com.talents.orange.demo.dto.response;
+package com.orangestalents.dto.response;
 
 import lombok.Builder;
 import lombok.Data;

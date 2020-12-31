@@ -1,7 +1,7 @@
-package com.talents.orange.demo.infrastructure;
+package com.orangestalents.orange.demo.infrastructure;
 
-import com.talents.orange.demo.entity.User;
-import com.talents.orange.demo.repository.UserRepository;
+import com.orangestalents.entity.User;
+import com.orangestalents.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;

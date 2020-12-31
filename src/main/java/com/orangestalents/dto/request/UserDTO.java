@@ -1,5 +1,4 @@
-package com.talents.orange.demo.entity;
-
+package com.orangestalents.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,42 +6,36 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDate;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
-
-@Entity
-@Table(name = "app_user")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
+public class UserDTO implements Serializable {
 
-
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @NotEmpty
-    @Column(length = 100, nullable = false)
+    @Size(min = 1, max = 100)
     private String nome;
 
     @NotEmpty
-    @Column(length = 11, nullable = false, unique = true)
-    @CPF(message = "CPF invalido")
+    @CPF
+    @Column(unique = true)
     private String cpf;
 
-    private LocalDate dataNascimento;
+    @NotEmpty
+    @Size(min = 1, max = 100)
+    private String dataNascimento;
 
     @NotEmpty
     @Email
-    @Column(unique = true)
+    @Size(min = 1, max = 100)
+    @Column(nullable = false, unique = true)
     private String email;
-
 }
