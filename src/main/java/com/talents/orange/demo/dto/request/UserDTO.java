@@ -26,23 +26,19 @@ public class UserDTO implements Serializable {
 
     @NotEmpty
     @Size(min = 1, max = 100)
-    @Pattern(regexp="^[a-zA-Z0-9]{3}",message="Nome deve conter somente caracteres")
     private String nome;
-
-    @NotEmpty
-    @Size(min = 1, max = 100)
-    private String dataNascimento;
 
     @NotEmpty
     @CPF
     private String cpf;
 
     @NotEmpty
+    @Size(min = 1, max = 100)
+    private String dataNascimento;
+
+    @NotEmpty
     @Email
     private String email;
 
-    @NotEmpty(message = "Defina um senha")
-    @Size(min = 1, max = 100)
-    private String senha;
 
 }

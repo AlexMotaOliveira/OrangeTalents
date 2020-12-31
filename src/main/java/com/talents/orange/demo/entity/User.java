@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -19,7 +20,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class User implements Serializable {
 
 
@@ -27,26 +27,20 @@ public class User implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @NotEmpty(message ="O nome não pode ser nulo")
+    @NotEmpty
     @Column(length = 100, nullable = false)
     private String nome;
 
-    //TODO corrigir tipo de data
-    @NotEmpty(message ="A Data nao pode estar vazio")
-    private String dataNascimento;
-
-    @NotEmpty(message ="O CPF nao pode estar vazio")
+    @NotEmpty
     @Column(length = 11, nullable = false, unique = true)
     @CPF(message = "CPF invalido")
     private String cpf;
 
-    @NotEmpty(message = "O email nao pode ser vazio")
-    @Email(message = "Email invalido")
+    private LocalDate dataNascimento;
+
+    @NotEmpty
+    @Email
     @Column(unique = true)
     private String email;
-
-    @NotEmpty(message = "Defina um senha")
-    @Size(max = 80, message = "A senha é muito longa")
-    private String senha;
 
 }
