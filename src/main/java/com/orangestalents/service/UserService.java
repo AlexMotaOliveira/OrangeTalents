@@ -3,6 +3,7 @@ package com.orangestalents.service;
 import com.orangestalents.dto.request.UserDTO;
 import com.orangestalents.dto.response.MessageResponseDTO;
 import com.orangestalents.entity.User;
+import com.orangestalents.exception.DuplicateUserException;
 import com.orangestalents.exception.UserNotFoundException;
 import com.orangestalents.mapper.UserMapper;
 import com.orangestalents.repository.UserRepository;
@@ -22,9 +23,10 @@ public class UserService {
 
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
-    public MessageResponseDTO createUser(@Valid UserDTO userDTO) {
+    public MessageResponseDTO createUser(@Valid UserDTO userDTO) throws DuplicateUserException {
         User userToSave = userMapper.toModel(userDTO);
 
+        verifyIfExistsCpforEmail(userToSave);
 
         User saveUser = userRepository.save(userToSave);
         return createMessageResponse(saveUser.getId(), "Usuário criado com sucesso ");
@@ -48,7 +50,6 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-
     public MessageResponseDTO updateById(Long id, UserDTO userDTO) throws UserNotFoundException {
         verifyIfExists(id);
 
@@ -59,7 +60,7 @@ public class UserService {
     }
 
     private User verifyIfExists(Long id) throws UserNotFoundException {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário " + id + " não localizado"));
     }
 
     private MessageResponseDTO createMessageResponse(Long id, String s) {
@@ -67,5 +68,22 @@ public class UserService {
                 .builder()
                 .message(s + id)
                 .build();
+    }
+
+    private void verifyIfExistsCpforEmail(User user) throws DuplicateUserException {
+        User userDBCPF = userRepository.findByCpfEquals(user.getCpf());
+        User userDBEmail = userRepository.findByEmailEquals(user.getEmail());
+
+        if (userDBCPF != null) {
+            if (user.getCpf().equals(userDBCPF.getCpf())) {
+                throw new DuplicateUserException("CPF já cadastrado");
+            }
+        }
+
+        if (userDBEmail != null) {
+            if (user.getEmail().equals(userDBEmail.getEmail())) {
+                throw new DuplicateUserException("Email já cadastrado");
+            }
+        }
     }
 }

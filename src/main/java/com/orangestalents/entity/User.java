@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PastOrPresent;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -26,19 +27,19 @@ public class User implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "campo não pode se nulo")
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @NotEmpty
+    @NotEmpty(message = "campo não pode se nulo")
     @CPF
     @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
-    @Column(nullable = false)
+    @Column(length = 10,nullable = false)
     private LocalDate dataNascimento;
 
-    @NotEmpty
+    @NotEmpty(message = "campo não pode se nulo")
     @Email
     @Column(nullable = false, unique = true)
     private String email;

@@ -1,4 +1,4 @@
-package com.orangestalents.orange.demo.infrastructure;
+package com.orangestalents.exception;
 
 public class DuplicateUserException extends  Exception {
 

@@ -2,6 +2,7 @@ package com.orangestalents.controller;
 
 import com.orangestalents.dto.request.UserDTO;
 import com.orangestalents.dto.response.MessageResponseDTO;
+import com.orangestalents.exception.DuplicateUserException;
 import com.orangestalents.exception.UserNotFoundException;
 import com.orangestalents.service.UserService;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createUser(@RequestBody @Valid UserDTO userDTO) {
+    public MessageResponseDTO createUser(@RequestBody @Valid UserDTO userDTO) throws DuplicateUserException {
         return userService.createUser(userDTO);
     }
 
@@ -37,12 +38,12 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void  delete (@PathVariable Long id) throws UserNotFoundException{
+    public void delete(@PathVariable Long id) throws UserNotFoundException {
         userService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public MessageResponseDTO updateById(@PathVariable Long id,@RequestBody @Valid UserDTO userDTO) throws UserNotFoundException {
+    public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody @Valid UserDTO userDTO) throws UserNotFoundException {
         return userService.updateById(id, userDTO);
     }
 }

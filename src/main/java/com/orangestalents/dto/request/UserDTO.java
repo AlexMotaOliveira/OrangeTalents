@@ -20,20 +20,20 @@ public class UserDTO implements Serializable {
 
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "campo não pode se nulo")
     @Size(min = 1, max = 100)
     private String nome;
 
-    @NotEmpty
+    @NotEmpty(message = "campo não pode se nulo")
     @CPF
     @Column(unique = true)
     private String cpf;
 
-    @NotEmpty
-    @Size(min = 1, max = 100)
+    @NotEmpty(message = "campo não pode se nulo")
+    @Size(min = 1, max = 10)
     private String dataNascimento;
 
-    @NotEmpty
+    @NotEmpty(message = "campo não pode se nulo")
     @Email
     @Size(min = 1, max = 100)
     @Column(nullable = false, unique = true)

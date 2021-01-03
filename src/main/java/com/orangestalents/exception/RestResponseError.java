@@ -1,18 +1,21 @@
-package com.orangestalents.orange.demo.infrastructure.web;
+package com.orangestalents.exception;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 
-@NoArgsConstructor @AllArgsConstructor
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestResponseError {
 
     private String error;
 
-    public  static RestResponseError fromValidationError(Errors errors){
+    public static RestResponseError fromValidationError(Errors errors) {
         RestResponseError resp = new RestResponseError();
         StringBuilder sb = new StringBuilder();
 
@@ -24,10 +27,15 @@ public class RestResponseError {
         return resp;
     }
 
-    public  static RestResponseError fromMessageDuplicate(String message) {
+    public static RestResponseError fromMessageDuplicate(String message) {
         RestResponseError resp = new RestResponseError();
         resp.error = message;
         return resp;
     }
 
+    public static RestResponseError userNotFoundException(String message) {
+        RestResponseError resp = new RestResponseError();
+        resp.error = message;
+        return resp;
+    }
 }
