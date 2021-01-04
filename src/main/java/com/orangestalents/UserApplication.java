@@ -1,6 +1,5 @@
 package com.orangestalents;
 
-import com.orangestalents.dto.request.UserDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,9 +10,9 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+
 @SpringBootApplication
 public class UserApplication implements RepositoryRestConfigurer {
-
 
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);
@@ -21,20 +20,22 @@ public class UserApplication implements RepositoryRestConfigurer {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry corsRegistry) {
-        corsRegistry.addMapping("/api/v1/**")
+        corsRegistry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT","DELETE");
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 
     @Bean
-    public Validator validator(){
+    public Validator validator() {
         return new LocalValidatorFactoryBean();
     }
 
     @Override
-    public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener vRel) {
+    public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener vrel) {
         Validator validator = validator();
-        vRel.addValidator("beforeCreate", validator);
-        vRel.addValidator("beforeSave", validator);
+        vrel.addValidator("beforeCreate", validator);
+        vrel.addValidator("beforeSave", validator);
     }
+
+
 }
